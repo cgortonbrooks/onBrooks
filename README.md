@@ -1,3 +1,3 @@
 # onBrooks
 
-Kevin should have 100 on this project
+Kevin should have 60 on this project
