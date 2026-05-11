@@ -15,9 +15,37 @@
 
 ## Databases
 - Student dir
+    - fname
+    - lname
+    - email
+    - grade
+    - address
+    - phone
+    - gpa
+    - DOB
+    - Boarding/Day
+    - Student ID
 - Faculty dir
-- Login info
+    - fname
+    - lname
+    - email
+    - phone number
+    - address
+    - role/title
+- Parent
+    - fname
+    - lname
+    - phone
+- Login info  
+    - user
+    - email
+    - type (student/parent/employee)
 - Classes
+    - department
+    - ID
+    - Room
+    - Time info
+    - Section
 
 ## Dashboard
 - List of upcomming assignments
