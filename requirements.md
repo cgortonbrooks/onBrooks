@@ -1,6 +1,6 @@
 ## Pages
 - Login
-- [Dashboard](https://github.com/cgortonbrooks/onBrooks/requirements.md#Dashboard)
+- [Dashboard](#Dashboard)
 - Assignment Center
 - Conduct
 - Directory
