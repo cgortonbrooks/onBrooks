@@ -8,9 +8,9 @@ app.use(express.urlencoded({extended: true}))
 
 const db = mysql.createConnection({
     host: '66.198.240.46',
-    user: 'bfzhiwes_node-intro-user',
-    password: 'node-intro-user-password',
-    database: 'bfzhiwes_node-intro'
+    user: 'bfzhiwes_onbrooks_user',
+    password: 'hh23f7vhbrh1gnil',
+    database: 'bfzhiwes_onbrooks'
 })
 
 app.get('/', (req, res) => {
