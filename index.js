@@ -18,7 +18,9 @@ const db = mysql.createConnection({
 app.get('/', (req, res) => {
     res.render('index', {})
 })
-
+app.get('/login', (req, res) => {
+    res.render('login', {})
+})
 app.listen(PORT, () => {
     console.log(`Server Running on http://localhost:${PORT}`)
 })
