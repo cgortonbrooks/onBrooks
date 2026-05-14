@@ -3,6 +3,8 @@ const mysql = require('mysql2')
 const app = express()
 const PORT = 3000
 
+app.set('view engine', 'ejs');
+
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 
@@ -14,7 +16,7 @@ const db = mysql.createConnection({
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.render('index', {})
 })
 
 app.listen(PORT, () => {
