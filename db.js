@@ -24,7 +24,7 @@ setInterval(() => {
 
 module.exports = { // https://stackoverflow.com/questions/5797852/how-do-i-include-functions-from-my-other-files
     requestStudents: function (res) {
-        let sql = 'SELECT * FROM students LIMIT 10'
+        let sql = 'SELECT * FROM students LEFT JOIN person ON students.person_id = person.id LIMIT 10;'
         db.query(sql, (err, results) => {
             if (err) return res.status(500).send(err)
 
