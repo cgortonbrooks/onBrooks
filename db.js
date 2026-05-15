@@ -7,6 +7,21 @@ const db = mysql.createConnection({
     database: 'bfzhiwes_onbrooks'
 })
 
+// Ping the connection to the database every minute to keep it alive
+setInterval(() => {
+    db.query('SELECT 1', (err) => {
+        if (err) {
+            console.error('Error pinging database:', err)
+        } else {
+            console.log('Database connection is alive')
+        }
+    })
+}, 60000) // Ping every minute
+
+// -------------
+//  API METHODS
+// -------------
+
 module.exports = { // https://stackoverflow.com/questions/5797852/how-do-i-include-functions-from-my-other-files
     requestStudents: function (res) {
         let sql = 'SELECT * FROM students LIMIT 10'

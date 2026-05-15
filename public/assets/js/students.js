@@ -11,7 +11,7 @@ function buildTable(students) {
 
         addLine(student.form, row)
         addLine(student.gpa, row)  
-        //addLine(student.bd, row)   
+        addLine(student['boarding/day'], row)   
     }
 }
 
