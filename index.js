@@ -15,12 +15,38 @@ const db = mysql.createConnection({
     database: 'bfzhiwes_onbrooks'
 })
 
+// -------
+// PAGES
+// -------
+
 app.get('/', (req, res) => {
     res.render('index', {})
 })
 app.get('/login', (req, res) => {
     res.render('login', {})
 })
+app.get('/students', (req, res) => {
+    res.render('students', {})
+})
+
+// -------------
+// API REQUESTS
+// -------------
+
+app.get('/api/students', (req, res) => {
+    let sql = 'SELECT * FROM students LIMIT 10'
+    db.query(sql, (err, results) => {
+        if (err) return res.status(500).send(err)
+        
+        let students = res.json(results)
+        res.send(students)
+    })
+})
+
+// -------
+// LISTEN
+// -------
+
 app.listen(PORT, () => {
-    console.log(`Server Running on http://localhost:${PORT}`)
+    console.log(`Server Running on http://localhost:${PORT}/students`)
 })
