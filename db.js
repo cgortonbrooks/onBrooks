@@ -13,8 +13,9 @@ module.exports = { // https://stackoverflow.com/questions/5797852/how-do-i-inclu
         db.query(sql, (err, results) => {
             if (err) return res.status(500).send(err)
 
-            let students = res.json(results)
-            res.send(students)
+            /*let students = res.json(results)
+            res.send(students)*/
+            res.json(results)
         })
     }
 }

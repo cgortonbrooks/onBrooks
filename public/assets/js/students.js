@@ -10,13 +10,14 @@ function buildTable(students) {
         doc.insertAdjacentElement('beforeend', row) 
 
         addLine(student.form, row)
-        addLine(student.gpa, row)     
+        addLine(student.gpa, row)  
+        //addLine(student.bd, row)   
     }
 }
 
 function addLine(stud, row) {
-    line = document.createElement('tl')
+    line = document.createElement('td')
     line.innerHTML = stud // JSON.stringify(student)
     row.insertAdjacentElement('beforeend', line) // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
-    console.log('insert')
+    console.log('insert', line)
 }
