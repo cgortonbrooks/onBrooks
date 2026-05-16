@@ -1,10 +1,10 @@
 const mysql = require('mysql2')
 
 const db = mysql.createConnection({
-    host: '66.198.240.46',
-    user: 'bfzhiwes_onbrooks_user',
-    password: 'hh23f7vhbrh1gnil',
-    database: 'bfzhiwes_onbrooks'
+    host: process.env.DB_HOST_KEY,
+    user: process.env.DB_USER_KEY,
+    password: process.env.DB_PASSWORD_KEY,
+    database: process.env.DB_DATABASE_KEY
 })
 
 // Ping the connection to the database every minute to keep it alive
