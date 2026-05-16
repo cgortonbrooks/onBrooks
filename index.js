@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: true}))
 // -------
 
 app.get('/', (req, res) => {
-    res.render('login', {})
+    res.render('index', {})
 })
 app.get('/login', (req, res) => {
     res.render('login', {})
