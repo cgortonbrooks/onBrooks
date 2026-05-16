@@ -1,7 +1,9 @@
+require('dotenv').config()
+
 const db = require('./db.js')
 const express = require('express')
 const app = express()
-const PORT = 3000
+const PORT = process.env.SERVER_PORT || 3000
 
 app.set('view engine', 'ejs');
 
@@ -13,7 +15,7 @@ app.use(express.urlencoded({extended: true}))
 // -------
 
 app.get('/', (req, res) => {
-    res.render('login', {})
+    res.render('index', {})
 })
 app.get('/login', (req, res) => {
     res.render('login', {})
