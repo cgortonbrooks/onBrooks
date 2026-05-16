@@ -35,5 +35,14 @@ app.get('/api/students', (req, res) => {
 // -------
 
 app.listen(PORT, () => {
-    console.log(`Server Running on http://localhost:${PORT}/students`)
+    console.log(`Server Running on http://localhost:${PORT}/login`)
 })
+
+//--------
+// POSTS
+//--------
+
+app.post('/authenticate-user', (req, res) => {
+    let { email, password } = req.body
+    let status = db.authenticate(email, password, res)
+}) 
