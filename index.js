@@ -15,7 +15,9 @@ app.use(
     session({
         secret: process.env.SECRET_KEY,
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: {maxAge: 60000 * 30}, // 30 minutes until expiration (WILL NEED TO CHANGE BASED ON CHECKED REMEMBER ME BOX)
+        rolling: true
     })
 )
 
