@@ -125,6 +125,9 @@
           height="67"
         />
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div id="error-message" role="alert" aria-live="assertive" class="mb-3"></div>
+
         <div class="form-floating">
           <input
             type="email"
@@ -168,5 +171,19 @@
       src="assets/dist/js/bootstrap.bundle.min.js"
       class="astro-vvvwv3sm"
     ></script>
+    <script>
+      const errorMessages = {
+        password: 'Incorrect password.',
+        user: 'Username undefined.',
+      };
+
+      const error = new URLSearchParams(window.location.search).get('error');
+      const message = errorMessages[error];
+
+      if (message) {
+        document.getElementById('error-message').innerHTML =
+          `<div class="alert alert-danger mb-0">${message}</div>`;
+      }
+    </script>
   </body>
 </html>
