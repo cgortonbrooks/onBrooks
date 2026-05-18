@@ -1,3 +1,5 @@
+let dotenv = require('dotenv').config()
+
 const mysql = require('mysql2')
 
 const db = mysql.createConnection({
@@ -34,12 +36,14 @@ function authenticate(email, pwd, res) {
     let password = db.query(`SELECT password FROM person WHERE email = '${email}'`, (err, results) => {
         if (err) {
             console.log(`error`)
+            console.log(err)
         }
         else {
             try {
                 if (pwd == results[0].password) {
                     console.log('password match')
                     res.redirect('/students')
+                    return "hi"
                 }
                 else {
                     console.log('passwords dont match')
@@ -54,4 +58,22 @@ function authenticate(email, pwd, res) {
     })
 }
 
-module.exports = { requestStudents, authenticate }
+async function get_pwd() {
+    let query = await getQueryResults(`SELECT password FROM person`)
+    return results = query.flatMap(Object.values)
+}
+
+async function getQueryResults(sql) {
+    return new Promise((resolve, reject) => {
+        db.query(sql, (err, results) => {
+            if (err) {
+                console.error('Error executing query:', err)
+                reject(err) // Reject the promise if there's an error
+                return
+            }
+            resolve(results) // Resolve the promise with the results
+        })
+    })
+}
+
+module.exports = { requestStudents, authenticate, get_pwd }
