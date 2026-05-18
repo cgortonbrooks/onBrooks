@@ -7,7 +7,7 @@ const app = express()
 const db = require('./db.js')
 
 const PORT = process.env.SERVER_PORT || 3000
-const DEV_MODE = true
+const DEV_MODE = true // set to true to give access to all pages without needing to login, if false, you'll need to login first.
 
 
 app.set('view engine', 'ejs');
