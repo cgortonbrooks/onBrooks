@@ -1,12 +1,21 @@
 require('dotenv').config()
 
-const db = require('./db.js')
 const express = require('express')
+const session = require('express-session')
 const app = express()
+
+const db = require('./db.js')
+
 const PORT = process.env.SERVER_PORT || 3000
+
 
 app.set('view engine', 'ejs');
 
+app.use(session({
+    secret: 'open session',
+    cookie: {maxAge: 30000},
+    saveUninitialized: false
+}))
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 
