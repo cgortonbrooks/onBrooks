@@ -1,7 +1,9 @@
+require('dotenv').config()
+
 const db = require('./db.js')
 const express = require('express')
 const app = express()
-const PORT = 3000
+const PORT = process.env.SERVER_PORT || 3000
 
 app.set('view engine', 'ejs');
 
@@ -35,5 +37,14 @@ app.get('/api/students', (req, res) => {
 // -------
 
 app.listen(PORT, () => {
-    console.log(`Server Running on http://localhost:${PORT}/students`)
+    console.log(`Server Running on http://localhost:${PORT}/login`)
 })
+
+//--------
+// POSTS
+//--------
+
+app.post('/authenticate-user', (req, res) => {
+    let { email, password } = req.body
+    let status = db.authenticate(email, password, res)
+}) 

@@ -116,7 +116,7 @@
       </ul>
     </div>
     <main class="form-signin w-100 m-auto">
-      <form>
+      <form action="/authenticate-user" method="POST">
         <img
           class="mb-4"
           src="images/Brooks-School_logo.jpg"
@@ -131,6 +131,8 @@
             class="form-control"
             id="floatingInput"
             placeholder="name@example.com"
+            name="email"
+            required
           />
           <label for="floatingInput">Email address</label>
         </div>
@@ -140,6 +142,8 @@
             class="form-control"
             id="floatingPassword"
             placeholder="Password"
+            name="password"
+            required
           />
           <label for="floatingPassword">Password</label>
         </div>
