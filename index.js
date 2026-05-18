@@ -7,6 +7,7 @@ const app = express()
 const db = require('./db.js')
 
 const PORT = process.env.SERVER_PORT || 3000
+const DEV_MODE = true
 
 
 app.set('view engine', 'ejs');
@@ -32,7 +33,7 @@ app.get('/', (req, res) => {
     checkAuth(req, res, 'index')
 })
 app.get('/login', (req, res) => {
-    if (req.session && req.session.email) res.redirect('/')
+    if (req.session && req.session.email && !DEV_MODE) res.redirect('/')
     else res.render('login', {})
 })
 app.get('/students', (req, res) => {
@@ -69,7 +70,7 @@ app.post('/authenticate-user', (req, res) => {
 //-----------
 
 function checkAuth(req, res, link) {
-    if (!req.session || !req.session.email) {
+    if (!DEV_MODE && (!req.session || !req.session.email)) {
         res.redirect('/login')
     } else {
         res.render(link, {})
