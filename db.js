@@ -30,7 +30,7 @@ function requestStudents(res) {
         })
 }
 
-function authenticate(email, pwd, res) {
+function authenticate(email, pwd, callback) {
     let password = db.query(`SELECT password FROM person WHERE email = '${email}'`, (err, results) => {
         if (err) {
             console.log(`error`)
@@ -39,15 +39,15 @@ function authenticate(email, pwd, res) {
             try {
                 if (pwd == results[0].password) {
                     console.log('password match')
-                    res.redirect('/students')
+                    callback(true)
                 }
                 else {
                     console.log('passwords dont match')
-                    res.redirect('/login')
+                    callback(false)
                 }
             } catch (TypeError) {
                 console.log('user not found')
-                res.redirect('/login')
+                callback(false)
             }
 
         }

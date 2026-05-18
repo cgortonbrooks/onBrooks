@@ -27,13 +27,14 @@ app.use(express.urlencoded({ extended: true }))
 // -------
 
 app.get('/', (req, res) => {
-    if (checkAuth(req, res)) res.render('index', {})
+    checkAuth(req, res, 'index')
 })
 app.get('/login', (req, res) => {
-    res.render('login', {})
+    if (req.session && req.session.email) res.redirect('/')
+    else res.render('login', {})
 })
 app.get('/students', (req, res) => {
-    if (checkAuth(req, res)) res.render('students', {})
+    checkAuth(req, res, 'students')
 })
 
 // -------------
@@ -58,18 +59,32 @@ app.listen(PORT, () => {
 
 app.post('/authenticate-user', (req, res) => {
     let { email, password } = req.body
-    let status = db.authenticate(email, password, res)
-}) 
+    db.authenticate(email, password, (status) => reauth(req, res, status, email))
+})
 
 //-----------
 // FUNCTIONS
 //-----------
 
-function checkAuth(req, res) {
+function checkAuth(req, res, link) {
     if (!req.session || !req.session.email) {
         res.redirect('/login')
-        return false
+    } else {
+        res.render(link, {})
     }
+}
 
-    return true
+function reauth(req, res, status, email) {
+    if (status) {
+        req.session.email = email
+        req.session.save((err) => {
+            if (err) {
+                return res.status(500).send('Session save failed');
+            }
+        });
+
+        res.redirect('/students')
+    } else {
+        res.redirect('/login')
+    }
 }
