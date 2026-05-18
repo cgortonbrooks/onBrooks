@@ -1,5 +1,4 @@
 const mysql = require('mysql2')
-//import * as mysql from mysql2
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST_KEY,
@@ -38,7 +37,6 @@ function authenticate(email, pwd, res) {
         }
         else {
             try {
-                console.log(`user found`)
                 if (pwd == results[0].password) {
                     console.log('password match')
                     res.redirect('/students')
@@ -56,5 +54,4 @@ function authenticate(email, pwd, res) {
     })
 }
 
-//export default { requestStudents }
 module.exports = { requestStudents, authenticate }
