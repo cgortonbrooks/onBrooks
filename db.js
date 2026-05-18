@@ -20,9 +20,9 @@ setInterval(() => {
     })
 }, 60000) // Ping every minute
 
-// -------------
-//  API METHODS
-// -------------
+// ------------------
+//  SYNC API METHODS
+// ------------------
 
 function requestStudents(res) {
     let sql = 'SELECT * FROM students LEFT JOIN person ON students.person_id = person.id LIMIT 10;'
@@ -56,6 +56,10 @@ function authenticate(email, pwd, callback) {
         }
     })
 }
+
+// ------------------
+//  ASYNC API METHODS
+// ------------------
 
 async function get_pwd() {
     let query = await getQueryResults(`SELECT password FROM person`)
