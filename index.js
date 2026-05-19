@@ -7,7 +7,6 @@ const app = express()
 const db = require('./db.js')
 
 const PORT = process.env.SERVER_PORT || 3000
-const DEV_MODE = true // set to true to give access to all pages without needing to login, if false, you'll need to login first.
 
 
 app.set('view engine', 'ejs');
@@ -33,7 +32,7 @@ app.get('/', (req, res) => {
     checkAuth(req, res, 'index')
 })
 app.get('/login', (req, res) => {
-    if (req.session && req.session.email && !DEV_MODE) res.redirect('/')
+    if (req.session && req.session.email && !process.env.DEV_MODE) res.redirect('/')
     else res.render('login', {})
 })
 app.get('/students', (req, res) => {
@@ -72,7 +71,7 @@ app.post('/authenticate-user', (req, res) => {
 //-----------
 
 function checkAuth(req, res, link) {
-    if (!DEV_MODE && (!req.session || !req.session.email)) {
+    if (!process.env.DEV_MODE && (!req.session || !req.session.email)) {
         res.redirect('/login')
     } else {
         res.render(link, {})
