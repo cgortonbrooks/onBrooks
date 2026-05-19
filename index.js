@@ -7,6 +7,7 @@ const app = express()
 const db = require('./db.js')
 
 const PORT = process.env.SERVER_PORT || 3000
+const DEV_MODE = process.env.DEV_MODE
 
 
 app.set('view engine', 'ejs');
