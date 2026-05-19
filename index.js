@@ -39,7 +39,9 @@ app.get('/login', (req, res) => {
 app.get('/students', (req, res) => {
     checkAuth(req, res, 'students')
 })
-
+app.get('/dashboard', (req, res) => {
+    checkAuth(req, res, 'dashboard')
+})
 // -------------
 // API REQUESTS
 // -------------
