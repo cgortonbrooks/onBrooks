@@ -1,5 +1,5 @@
+let bcrypt = require('bcryptjs')
 let dotenv = require('dotenv').config()
-
 const mysql = require('mysql2')
 
 const db = mysql.createConnection({
@@ -40,7 +40,7 @@ function authenticate(email, pwd, callback) {
         }
         else {
             try {
-                if (pwd == results[0].password) {
+                if (bcrypt.compareSync(pwd, results[0].password)) {
                     console.log('password match')
                     callback(true)
                 }
