@@ -39,6 +39,9 @@ app.get('/login', (req, res) => {
 app.get('/students', (req, res) => {
     checkAuth(req, res, 'students')
 })
+app.get('/schedule', (req, res) => {
+    checkAuth(req, res, 'schedule')
+})
 
 // -------------
 // API REQUESTS
@@ -46,6 +49,9 @@ app.get('/students', (req, res) => {
 
 app.get('/api/students', (req, res) => {
     db.requestStudents(res)
+})
+app.get('/api/schedule', (req, res) => {
+    db.requestSchedule(res)
 })
 
 // -------
