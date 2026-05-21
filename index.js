@@ -88,6 +88,6 @@ function reauth(req, res, status, email) {
 
         res.redirect('/students')
     } else {
-        res.redirect('/login?=failedAuth')
+        res.redirect('/login?error=failedAuth')
     }
 }
