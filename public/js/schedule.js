@@ -1,12 +1,4 @@
 let doc = document.getElementById('scheduleTable')
-const blocksEachDay = {
-    'monday': ['A', 'B', 'C', 'D', 'E'],
-    'tuesday': ['B', 'C', 'D', 'E', 'A'],
-    'wednesday': ['C', 'D', 'E', 'A', 'B'],
-    'thursday': ['D', 'E', 'A', 'B', 'C'],
-    'friday': ['E', 'A', 'B', 'C', 'D'],
-    'saturday': ['A', 'B', 'C', 'D', 'E']
-}
 
 fetch('/api/schedule').then(res => res.json()).then(schedule => buildTable(schedule)) // https://www.youtube.com/watch?v=2DVbW0Szqh0
 
