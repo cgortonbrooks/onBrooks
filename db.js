@@ -32,6 +32,14 @@ function requestStudents(res) {
         })
 }
 
+function requestSchedule(res) {
+    let sql = 'SELECT * FROM placeholder LEFT JOIN placeholder ON placeholder.person_id = person.id LIMIT 10;'
+        db.query(sql, (err, results) => {
+            if (err) return res.status(500).send(err)
+            res.json(results)
+        })
+}
+
 function authenticate(email, pwd, callback) {
     let password = db.query(`SELECT password FROM person WHERE email = '${email}'`, (err, results) => {
         if (err) {

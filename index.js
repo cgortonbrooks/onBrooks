@@ -7,7 +7,7 @@ const app = express()
 const db = require('./db.js')
 
 const PORT = process.env.SERVER_PORT || 3000
-const DEV_MODE = false // set to true to give access to all pages without needing to login, if false, you'll need to login first.
+const DEV_MODE = process.env.DEV_MODE
 
 
 app.set('view engine', 'ejs');
@@ -33,11 +33,17 @@ app.get('/', (req, res) => {
     checkAuth(req, res, 'index')
 })
 app.get('/login', (req, res) => {
-    if (req.session && req.session.email && !DEV_MODE) res.redirect('/')
+    if (req.session && req.session.email && !(DEV_MODE == 'true')) res.redirect('/')
     else res.render('login', {})
 })
 app.get('/students', (req, res) => {
     checkAuth(req, res, 'students')
+})
+app.get('/dashboard', (req, res) => {
+    checkAuth(req, res, 'dashboard')
+})
+app.get('/schedule', (req, res) => {
+    checkAuth(req, res, 'schedule')
 })
 
 // -------------
@@ -46,6 +52,9 @@ app.get('/students', (req, res) => {
 
 app.get('/api/students', (req, res) => {
     db.requestStudents(res)
+})
+app.get('/api/schedule', (req, res) => {
+    db.requestSchedule(res)
 })
 
 // -------
@@ -70,7 +79,7 @@ app.post('/authenticate-user', (req, res) => {
 //-----------
 
 function checkAuth(req, res, link) {
-    if (!DEV_MODE && (!req.session || !req.session.email)) {
+    if (!(DEV_MODE == 'true') && (!req.session || !req.session.email)) {
         res.redirect('/login')
     } else {
         res.render(link, {})
