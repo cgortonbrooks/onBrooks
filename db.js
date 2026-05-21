@@ -26,18 +26,10 @@ setInterval(() => {
 
 function requestStudents(res) {
     let sql = 'SELECT * FROM students LEFT JOIN person ON students.person_id = person.id LIMIT 10;'
-        db.query(sql, (err, results) => {
-            if (err) return res.status(500).send(err)
-            res.json(results)
-        })
-}
-
-function requestSchedule(res) {
-    let sql = 'SELECT * FROM placeholder LEFT JOIN placeholder ON placeholder.person_id = person.id LIMIT 10;'
-        db.query(sql, (err, results) => {
-            if (err) return res.status(500).send(err)
-            res.json(results)
-        })
+    db.query(sql, (err, results) => {
+        if (err) return res.status(500).send(err)
+        res.json(results)
+    })
 }
 
 function authenticate(email, pwd, callback) {
@@ -68,6 +60,17 @@ function authenticate(email, pwd, callback) {
 // ------------------
 //  ASYNC API METHODS
 // ------------------
+async function requestSchedule(res, student_email) {
+    try {
+        let sql = `SELECT roster.class_id FROM roster, person, students WHERE roster.student_id=students.student_id AND students.person_id=person.id AND person.email='${student_email}'`
+        let results = await getQueryResults(sql, student_email)
+        //res.json(results)
+        return results
+    } catch (err) {
+        console.error('Error in requestSchedule:', err)
+        res.status(500).send(err)
+    }
+}
 
 async function get_pwd() {
     let query = await getQueryResults(`SELECT password FROM person`)
@@ -87,4 +90,4 @@ async function getQueryResults(sql) {
     })
 }
 
-module.exports = { requestStudents, authenticate, get_pwd }
+module.exports = { requestStudents, authenticate, get_pwd, requestSchedule }
