@@ -1,3 +1,5 @@
+// Remember, if something doesn't seem to be working, just fix it (or npm install). ~ Kaden
+
 require('dotenv').config()
 
 const express = require('express')
