@@ -111,12 +111,13 @@
       const errorMessages = {
         password: 'Incorrect password.',
         user: 'Username not found.',
+        failedAuth:'Failed auth'
       };
       const error = new URLSearchParams(window.location.search).get('error');
       if (errorMessages[error]) {
         showError(errorMessages[error]);
       }
-      
+
       document.getElementById('loginForm').addEventListener('submit', function (e) {
         const email = document.getElementById('floatingInput').value.trim();
         const password = document.getElementById('floatingPassword').value.trim();
