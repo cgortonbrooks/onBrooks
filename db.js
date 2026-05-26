@@ -21,36 +21,29 @@ setInterval(() => {
 }, 60000) // Ping every minute
 
 // ------------------
-//  SYNC API METHODS
-// ------------------
-function authenticate(email, pwd, callback) {
-    let password = db.query(`SELECT password FROM person WHERE email = '${email}'`, (err, results) => {
-        if (err) {
-            console.log(`error`)
-            console.log(err)
-        }
-        else {
-            try {
-                if (bcrypt.compareSync(pwd, results[0].password)) {
-                    console.log('password match')
-                    callback(true)
-                }
-                else {
-                    console.log('passwords dont match')
-                    callback(false)
-                }
-            } catch (TypeError) {
-                console.log('user not found')
-                callback(false)
-            }
-
-        }
-    })
-}
-
-// ------------------
 //  ASYNC API METHODS
 // ------------------
+
+async function authenticate(email, pwd, callback) {
+    try {
+        let sql = `SELECT password FROM person WHERE email = '${email}'`
+        let password = await getQueryResults(sql)
+        try {
+            if (bcrypt.compareSync(pwd, password[0].password)) {
+                callback(true)
+            }
+            else {
+                callback(false)
+            }
+        } catch (TypeError) {
+            callback(false)
+        }
+    } catch (err) {
+        console.log('Error in authenticate:', err)
+        console.log(err)
+    }
+}
+
 async function requestStudents(res) {
     try {
         let sql = 'SELECT * FROM students LEFT JOIN person ON students.person_id = person.id LIMIT 10;'

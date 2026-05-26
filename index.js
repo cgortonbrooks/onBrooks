@@ -101,7 +101,7 @@ function reauth(req, res, status, email) {
             }
         });
 
-        res.redirect('/students')
+        res.redirect('/dashboard')
     } else {
         res.redirect('/login?error=failedAuth')
     }
