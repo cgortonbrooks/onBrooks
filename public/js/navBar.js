@@ -1,6 +1,6 @@
 let navBar = document.getElementById('navBar')
 
-fetch('/api/classes').then(res => res.json()).then(classes => buildNav(classes))
+fetch('/api/schedule').then(res => res.json()).then(classes => buildNav(classes))
 
 function buildNav(classes) {
     console.log(classes)
