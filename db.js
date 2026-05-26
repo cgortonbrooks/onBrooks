@@ -23,15 +23,6 @@ setInterval(() => {
 // ------------------
 //  SYNC API METHODS
 // ------------------
-
-function requestStudents(res) {
-    let sql = 'SELECT * FROM students LEFT JOIN person ON students.person_id = person.id LIMIT 10;'
-    db.query(sql, (err, results) => {
-        if (err) return res.status(500).send(err)
-        res.json(results)
-    })
-}
-
 function authenticate(email, pwd, callback) {
     let password = db.query(`SELECT password FROM person WHERE email = '${email}'`, (err, results) => {
         if (err) {
@@ -60,6 +51,17 @@ function authenticate(email, pwd, callback) {
 // ------------------
 //  ASYNC API METHODS
 // ------------------
+async function requestStudents(res) {
+    try {
+        let sql = 'SELECT * FROM students LEFT JOIN person ON students.person_id = person.id LIMIT 10;'
+        let results = await getQueryResults(sql)
+        res.json(results)
+    } catch (error) {
+        console.log('Error in requestStudents:', err)
+        res.status(500).send(err)
+    }
+}
+
 async function requestSchedule(res, student_email) {
     try {
         let sql = `SELECT roster.class_id FROM roster, person, students WHERE roster.student_id=students.student_id AND students.person_id=person.id AND person.email='${student_email}'`
