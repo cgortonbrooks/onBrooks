@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true }))
 // -------
 
 app.get('/', (req, res) => {
-    checkAuth(req, res, 'index')
+    checkAuth(req, res, 'dashboard')
 })
 app.get('/login', (req, res) => {
     if (req.session && req.session.email && !(DEV_MODE == 'true')) res.redirect('/')
