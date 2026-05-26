@@ -4,9 +4,10 @@ require('dotenv').config()
 
 const express = require('express')
 const session = require('express-session')
-const app = express()
-
 const db = require('./db.js')
+const schedule = require('./serverschedule.js')
+
+const app = express()
 
 const PORT = process.env.SERVER_PORT || 3000
 const DEV_MODE = process.env.DEV_MODE
@@ -32,7 +33,7 @@ app.use(express.urlencoded({ extended: true }))
 // -------
 
 app.get('/', (req, res) => {
-    checkAuth(req, res, 'index')
+    checkAuth(req, res, 'dashboard')
 })
 app.get('/login', (req, res) => {
     if (req.session && req.session.email && !(DEV_MODE == 'true')) res.redirect('/')
@@ -47,6 +48,9 @@ app.get('/dashboard', (req, res) => {
 app.get('/schedule', (req, res) => {
     checkAuth(req, res, 'schedule')
 })
+app.get('/classes', (req, res) => {
+    checkAuth(req, res, 'classes')
+})
 
 // -------------
 // API REQUESTS
@@ -56,7 +60,7 @@ app.get('/api/students', (req, res) => {
     db.requestStudents(res)
 })
 app.get('/api/schedule', (req, res) => {
-    db.requestSchedule(res)
+    schedule.getStudentClasses(res, req.session.email)
 })
 
 // -------

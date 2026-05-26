@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>students</title>
+    <%- include('partials/head') %>
+    <title>Students</title>
     <script src="js/students.js" defer></script>
 </head>
-<body>
-    <table id="studentTable">
-        <tr>
-            <th>fname</th>
-            <th>lname</th>
-            <th>form</th>
-            <th>gpa</th>
-            <th>boarding/day</th>
-        </tr>
-    </table>
+<body class="bg-body-tertiary">
+
+    <%- include('partials/navbar') %>
+
+    <div class="container py-5">
+        <h2 class="mb-4">Student Directory</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Form</th>
+                        <th>GPA</th>
+                        <th>Boarding / Day</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>
