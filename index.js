@@ -10,7 +10,9 @@ const schedule = require('./serverschedule.js')
 const app = express()
 
 const PORT = process.env.SERVER_PORT || 3000
-const DEV_MODE = process.env.DEV_MODE
+const DEV_MODE = process.env.DEV_MODE === 'true'
+const DEV_MODE_DEFAULT_EMAIL = process.env.DEV_MODE_DEFAULT_EMAIL
+const DEV_MODE_DEFAULT_PASSWORD = process.env.DEV_MODE_DEFAULT_PASSWORD
 
 
 app.set('view engine', 'ejs');
@@ -25,6 +27,16 @@ app.use(
     })
 )
 
+app.use((req, res, next) => {
+    if (!DEV_MODE || req.session?.email) {
+        return next()
+    }
+
+    req.session.email = DEV_MODE_DEFAULT_EMAIL
+    req.session.devModeAutoLogin = true
+    next()
+})
+
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
@@ -36,7 +48,7 @@ app.get('/', (req, res) => {
     checkAuth(req, res, 'dashboard')
 })
 app.get('/login', (req, res) => {
-    if (req.session && req.session.email && !(DEV_MODE == 'true')) res.redirect('/')
+    if (req.session && req.session.email) res.redirect('/')
     else res.render('login', {})
 })
 app.get('/students', (req, res) => {
@@ -86,6 +98,9 @@ app.listen(PORT, () => {
 
 app.post('/authenticate-user', (req, res) => {
     let { email, password } = req.body
+    if (DEV_MODE && email === DEV_MODE_DEFAULT_EMAIL && password === DEV_MODE_DEFAULT_PASSWORD) {
+        return reauth(req, res, true, email)
+    }
     db.authenticate(email, password, (status) => reauth(req, res, status, email))
 })
 
@@ -94,7 +109,7 @@ app.post('/authenticate-user', (req, res) => {
 //-----------
 
 function checkAuth(req, res, link) {
-    if (!(DEV_MODE == 'true') && (!req.session || !req.session.email)) {
+    if (!req.session || !req.session.email) {
         res.redirect('/login')
     } else {
         res.render(link, {})

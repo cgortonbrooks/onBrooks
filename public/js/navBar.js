@@ -3,8 +3,6 @@ let navBar = document.getElementById('navBar')
 fetch('/api/schedule?sorted=false').then(res => res.json()).then(classes => buildNav(classes))
 
 async function buildNav(classes) {
-    console.log(classes)
-
     for (let c of classes) {
         let className = await getClassName(c)
         const ul = document.getElementById('classes-dropdown')
@@ -22,6 +20,5 @@ async function buildNav(classes) {
 async function getClassName(classID) {
     let classes = await fetch(`/api/class?class=${classID}`).then(res => res.json())
     let result = classes[0].name
-    console.log(result)
     return result
 }
