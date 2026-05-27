@@ -24,6 +24,30 @@ setInterval(() => {
 //  ASYNC API METHODS
 // ------------------
 
+async function getClassInfo(classID, res) {
+    try {
+        let sql = `SELECT * FROM sections WHERE sections.classID='${classID}'`
+        let query = await getQueryResults(sql)
+        console.log(query)
+        res.json(query)
+    } catch (error) {
+        console.error('Error in getClassInfo:', error)
+        res.status(500).send(error)
+    }
+}
+
+async function requestSchedule(res, student_email) {
+    try {
+        let sql = `SELECT roster.class_id FROM roster, person, students WHERE roster.student_id=students.student_id AND students.person_id=person.id AND person.email='${student_email}'`
+        let results = await getQueryResults(sql, student_email)
+        //res.json(results)
+        return results
+    } catch (error) {
+        console.error('Error in requestSchedule:', error)
+        res.status(500).send(error)
+    }
+}
+
 async function authenticate(email, pwd, callback) {
     try {
         let sql = `SELECT password FROM person WHERE email = '${email}'`
@@ -38,9 +62,9 @@ async function authenticate(email, pwd, callback) {
         } catch (TypeError) {
             callback(false)
         }
-    } catch (err) {
-        console.log('Error in authenticate:', err)
-        console.log(err)
+    } catch (error) {
+        console.log('Error in authenticate:', error)
+        console.log(error)
     }
 }
 
@@ -50,26 +74,9 @@ async function requestStudents(res) {
         let results = await getQueryResults(sql)
         res.json(results)
     } catch (error) {
-        console.log('Error in requestStudents:', err)
-        res.status(500).send(err)
+        console.log('Error in requestStudents:', error)
+        res.status(500).send(error)
     }
-}
-
-async function requestSchedule(res, student_email) {
-    try {
-        let sql = `SELECT roster.class_id FROM roster, person, students WHERE roster.student_id=students.student_id AND students.person_id=person.id AND person.email='${student_email}'`
-        let results = await getQueryResults(sql, student_email)
-        //res.json(results)
-        return results
-    } catch (err) {
-        console.error('Error in requestSchedule:', err)
-        res.status(500).send(err)
-    }
-}
-
-async function get_pwd() {
-    let query = await getQueryResults(`SELECT password FROM person`)
-    return results = query.flatMap(Object.values)
 }
 
 async function getQueryResults(sql) {
@@ -85,4 +92,4 @@ async function getQueryResults(sql) {
     })
 }
 
-module.exports = { requestStudents, authenticate, get_pwd, requestSchedule }
+module.exports = { requestStudents, authenticate, requestSchedule, getClassInfo }

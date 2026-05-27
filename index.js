@@ -62,6 +62,10 @@ app.get('/api/students', (req, res) => {
 app.get('/api/schedule', (req, res) => {
     schedule.getStudentClasses(res, req.session.email)
 })
+app.get('/api/class', (req, res) => {
+    let query = req.query.class
+    db.getClassInfo(query, res)
+})
 
 // -------
 // LISTEN
