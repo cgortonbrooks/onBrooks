@@ -60,7 +60,12 @@ app.get('/api/students', (req, res) => {
     db.requestStudents(res)
 })
 app.get('/api/schedule', (req, res) => {
-    schedule.getStudentClasses(res, req.session.email)
+    let sortedState = req.query.sorted === 'false' ? false : true
+    if (!sortedState) {
+        schedule.getStudentClasses(res, req.session.email, sortedState)
+    } else {
+        schedule.getStudentClasses(res, req.session.email)
+    }    
 })
 app.get('/api/class', (req, res) => {
     let query = req.query.class

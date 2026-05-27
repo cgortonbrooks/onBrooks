@@ -13,7 +13,7 @@ const blocksEachDay = {
     'saturday': ['A', 'B', 'C', 'D', 'E']
 }
 
-async function getStudentClasses(res, email) {
+async function getStudentClasses(res, email, sorted = true) {
     let day = new Date()
     let today = day.toLocaleDateString('en-US', {weekday: 'long'}).toLowerCase()
     let classes = await db.requestSchedule(res, email)
@@ -22,14 +22,18 @@ async function getStudentClasses(res, email) {
     for (let i of classes) {
         studentSchedule.push(i.class_id)
     }
-    for (let i of blocksEachDay[today]) {
-        for (let j of studentSchedule) {
-            if (i == j.at(-1)) {
-                sortedSchedule.push(j)
+    if (sorted) {
+        for (let i of blocksEachDay[today]) {
+            for (let j of studentSchedule) {
+                if (i == j.at(-1)) {
+                    sortedSchedule.push(j)
+                }
             }
         }
+        res.json(sortedSchedule)
+    } else {
+        res.json(studentSchedule)
     }
-    res.json(sortedSchedule)
 }
 
 module.exports = { getStudentClasses }

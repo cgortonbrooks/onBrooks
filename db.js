@@ -28,7 +28,7 @@ async function getClassInfo(classID, res) {
     try {
         let sql = `SELECT * FROM sections WHERE sections.classID='${classID}'`
         let query = await getQueryResults(sql)
-        console.log(query)
+        //console.log(query)
         res.json(query)
     } catch (error) {
         console.error('Error in getClassInfo:', error)

@@ -1,18 +1,27 @@
 let navBar = document.getElementById('navBar')
 
-fetch('/api/schedule').then(res => res.json()).then(classes => buildNav(classes))
+fetch('/api/schedule?sorted=false').then(res => res.json()).then(classes => buildNav(classes))
 
-function buildNav(classes) {
+async function buildNav(classes) {
     console.log(classes)
 
     for (let c of classes) {
-        // let row = document.createElement('tr')
-        // doc.insertAdjacentElement('beforeend', row)
+        let className = await getClassName(c)
+        const ul = document.getElementById('classes-dropdown')
+        const li = document.createElement('li')
+        const a = document.createElement('a')
 
-        // addLine(student.fname, row)
-        // addLine(student.lname, row)
-        // addLine(student.form, row)
-        // addLine(student.gpa, row)
-        // addLine(student['boarding/day'], row)
+        a.className = 'dropdown-item'
+        a.href = `/classes?class=${c}`
+        a.textContent = className
+
+        ul.appendChild(li.appendChild(a))
     }
+}
+
+async function getClassName(classID) {
+    let classes = await fetch(`/api/class?class=${classID}`).then(res => res.json())
+    let result = classes[0].name
+    console.log(result)
+    return result
 }
