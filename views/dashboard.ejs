@@ -15,125 +15,7 @@
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <script src="js/schedule.js" defer></script>
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: #0000001a;
-        border: solid rgba(0, 0, 0, 0.15);
-        border-width: 1px 0;
-        box-shadow:
-          inset 0 0.5em 1.5em #0000001a,
-          inset 0 0.125em 0.5em #00000026;
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -0.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-      }
-
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
-
-      .bd-mode-toggle .bi {
-        width: 1em;
-        height: 1em;
-      }
-
-      .bd-mode-toggle .dropdown-menu .active .bi {
-        display: block !important;
-      }
-
-      .marquee-container {
-        width: 100%;
-        background-color: #f8f9fa;
-        padding: 15px 0;
-      }
-
-      .marquee-content {
-        display: flex;
-        animation: marquee 20s linear infinite;
-      }
-
-      .marquee-item {
-        flex: 0 0 auto;
-        padding: 0 20px;
-        font-size: 1.2rem;
-        color: #495057;
-      }
-
-      @keyframes marquee {
-        0% {
-          transform: translateX(100%);
-        }
-
-        100% {
-          transform: translateX(-100%);
-        }
-      }
-
-      /* Optional: Pause animation on hover */
-      .marquee-container:hover .marquee-content {
-        animation-play-state: paused;
-      }
-
-      /* css for assignments */
-    </style>
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 
 <body>
@@ -144,7 +26,7 @@
       crossorigin="anonymous"></script>
     <!-- end of navbar -->
 
-<img src="images/welcome.jpeg" alt="Welcome">
+    <img src="images/welcome.jpeg" alt="Welcome">
 
     <!-- start of marquee -->
 
@@ -153,8 +35,10 @@
         <div class="marquee-item px-4 py-2 bg-primary text-white rounded-pill mx-2">Brooks Announcements!!</div>
         <div class="marquee-item px-4 py-2 bg-success text-white rounded-pill mx-2">School meeting tomorrow</div>
         <div class="marquee-item px-4 py-2 bg-info text-white rounded-pill mx-2">Check EOL schedule for next week</div>
-        <div class="marquee-item px-4 py-2 bg-warning text-dark rounded-pill mx-2">Sign up for next years afternoon activities</div>
-        <div class="marquee-item px-4 py-2 bg-danger text-white rounded-pill mx-2">Clean out locker before end of school.</div>
+        <div class="marquee-item px-4 py-2 bg-warning text-dark rounded-pill mx-2">Sign up for next years afternoon
+          activities</div>
+        <div class="marquee-item px-4 py-2 bg-danger text-white rounded-pill mx-2">Clean out locker before end of
+          school.</div>
       </div>
     </div>
 
@@ -162,99 +46,106 @@
 
     <!--start of assignments-->
     <section class="vh-100" style="background-color: #eee;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-lg-9 col-xl-7">
-        <div class="card rounded-3">
-          <div class="card-body p-4">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+              <div class="card-body p-4">
 
-            <h4 class="text-center my-3 pb-3">Assignments</h4>
+                <h4 class="text-center my-3 pb-3">Assignments</h4>
 
-            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
-              <div class="col-12">
-                <div data-mdb-input-init class="form-outline">
-                  <input type="text" id="form1" class="form-control" />
-                  <label class="form-label" for="form1">Enter a task here</label>
-                </div>
+                <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
+                  <div class="col-12">
+                    <div data-mdb-input-init class="form-outline">
+                      <input type="text" id="form1" class="form-control" />
+                      <label class="form-label" for="form1">Enter a task here</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                      class="btn btn-primary">Save</button>
+                  </div>
+
+
+                </form>
+
+                <table class="table mb-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">No.</th>
+                      <th scope="col">Todo item</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Finish spanish project</td>
+                      <td>In progress</td>
+                      <td>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                          class="btn btn-danger">Delete</button>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                          class="btn btn-success ms-1">Finished</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Study for math EOL</td>
+                      <td>In progress</td>
+                      <td>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                          class="btn btn-danger">Delete</button>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                          class="btn btn-success ms-1">Finished</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Complete any missing assignments</td>
+                      <td>In progress</td>
+                      <td>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                          class="btn btn-danger">Delete</button>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                          class="btn btn-success ms-1">Finished</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
               </div>
-
-              <div class="col-12">
-                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Save</button>
-              </div>
-
-          
-            </form>
-
-            <table class="table mb-4">
-              <thead>
-                <tr>
-                  <th scope="col">No.</th>
-                  <th scope="col">Todo item</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Finish spanish project</td>
-                  <td>In progress</td>
-                  <td>
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger">Delete</button>
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success ms-1">Finished</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Study for math EOL</td>
-                  <td>In progress</td>
-                  <td>
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger">Delete</button>
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success ms-1">Finished</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Complete any missing assignments</td>
-                  <td>In progress</td>
-                  <td>
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger">Delete</button>
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success ms-1">Finished</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
     <!--end of assignments-->
 
-   <!--Start of Schedule-->
-       <div class="container py-5">
-        <h2 class="mb-4">My Schedule</h2>
-        <div class="table-responsive">
-            <table class="table table-striped table-hover table-bordered align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Block</th>
-                        <th>Class Name</th>
-                        <th>Teacher ID</th>
-                    </tr>
-                </thead>
-                <tbody id="scheduleTable"></tbody>
-            </table>
-        </div>
+    <!--Start of Schedule-->
+    <div class="container py-5">
+      <h2 class="mb-4">My Schedule</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Block</th>
+              <th>Class Name</th>
+              <th>Teacher ID</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleTable"></tbody>
+        </table>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"></script>
     <!--END of Schedule-->
-   
+
 </body>
 
 </html>
