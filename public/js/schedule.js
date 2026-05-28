@@ -7,16 +7,16 @@ function buildTable(schedule) {
 
     for (let thing of schedule) {
         let row = document.createElement('tr')
-        doc.insertAdjacentElement('beforeend', row) 
+        doc.insertAdjacentElement('beforeend', row)
 
         addLine(thing.block, row)
         addLine(thing.class, row)
-        addLine(thing.teacher, row) 
+        addLine(thing.teacher, row)
     }
 }
 
 function addLine(stud, row) {
-    line = document.createElement('td')
+    let line = document.createElement('td')
     line.innerHTML = stud // JSON.stringify(student)
     row.insertAdjacentElement('beforeend', line) // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
     console.log('insert', line)

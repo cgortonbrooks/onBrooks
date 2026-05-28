@@ -13,7 +13,8 @@ async function buildNav(classes) {
         a.href = `/classes?class=${c}`
         a.textContent = className
 
-        ul.appendChild(li.appendChild(a))
+        li.appendChild(a)
+        ul.appendChild(li)
     }
 }
 

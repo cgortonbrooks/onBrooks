@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OnBrookies</title>
+    <%- include('partials/head') %>
+    <title>Schedule</title>
     <script src="js/schedule.js" defer></script>
 </head>
-<body>
-    <table id="scheduleTable">
-        <tr>
-            <th>Block</th>
-            <th>Class Name</th>
-            <th>Teacher</th>
-        </tr>
-    </table>
+<body class="bg-body-tertiary">
+
+    <%- include('partials/navbar') %>
+
+    <div class="container py-5">
+        <h2 class="mb-4">My Schedule</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Block</th>
+                        <th>Class Name</th>
+                        <th>Teacher ID</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -36,6 +36,17 @@ async function getClassInfo(classID, res) {
     }
 }
 
+async function getClassInfoRaw(classID) {
+    try {
+        let sql = `SELECT * FROM sections WHERE sections.classID='${classID}'`
+        let query = await getQueryResults(sql)
+        return query[0]
+    } catch (error) {
+        console.error('Error in getClassInfoRaw:', error)
+        return null
+    }
+}
+
 async function requestSchedule(res, student_email) {
     try {
         let sql = `SELECT roster.class_id FROM roster, person, students WHERE roster.student_id=students.student_id AND students.person_id=person.id AND person.email='${student_email}'`
@@ -79,17 +90,28 @@ async function requestStudents(res) {
     }
 }
 
+async function requestClasses(res) {
+    try {
+        let sql = 'SELECT DISTINCT roster.class_id, sections.name FROM roster LEFT JOIN sections ON roster.class_id = sections.classID'
+        let results = await getQueryResults(sql)
+        res.json(results)
+    } catch (error) {
+        console.log('Error in requestClasses:', error)
+        res.status(500).send(error)
+    }
+}
+
 async function getQueryResults(sql) {
     return new Promise((resolve, reject) => {
         db.query(sql, (err, results) => {
             if (err) {
                 console.error('Error executing query:', err)
-                reject(err) // Reject the promise if there's an error
+                reject(err)
                 return
             }
-            resolve(results) // Resolve the promise with the results
+            resolve(results)
         })
     })
 }
 
-module.exports = { requestStudents, authenticate, requestSchedule, getClassInfo }
+module.exports = { requestStudents, authenticate, requestSchedule, getClassInfo, getClassInfoRaw, requestClasses }

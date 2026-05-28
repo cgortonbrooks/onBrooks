@@ -84,6 +84,10 @@ app.get('/api/class', (req, res) => {
     db.getClassInfo(query, res)
 })
 
+app.get('/api/classes', (req, res) => {
+    db.requestClasses(res)
+})
+
 // -------
 // LISTEN
 // -------

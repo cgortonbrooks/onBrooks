@@ -19,9 +19,11 @@ async function getStudentClasses(res, email, sorted = true) {
     let classes = await db.requestSchedule(res, email)
     let studentSchedule = []
     let sortedSchedule = []
+
     for (let i of classes) {
         studentSchedule.push(i.class_id)
     }
+
     if (sorted) {
         for (let i of blocksEachDay[today]) {
             for (let j of studentSchedule) {
@@ -30,7 +32,19 @@ async function getStudentClasses(res, email, sorted = true) {
                 }
             }
         }
-        res.json(sortedSchedule)
+
+        let detailedSchedule = []
+        for (let classID of sortedSchedule) {
+            let info = await db.getClassInfoRaw(classID)
+            if (info) {
+                detailedSchedule.push({
+                    block: classID.at(-1),
+                    class: info.name,
+                    teacher: info.teacher_id
+                })
+            }
+        }
+        res.json(detailedSchedule)
     } else {
         res.json(studentSchedule)
     }
